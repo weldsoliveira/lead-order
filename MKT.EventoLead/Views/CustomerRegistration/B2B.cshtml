@@ -185,6 +185,10 @@
                     <input type="text" asp-for="City" />
                 </div>
                 <div class="Input">
+                    <p>State <span></span></p>
+                    <input type="text" asp-for="State" />
+                </div>
+                <div class="Input">
                     <p>Country <span class="Obrigatorio">*</span></p>
                     <input type="text" asp-for="Country" />
                 </div>
@@ -193,13 +197,12 @@
                     <input type="text" asp-for="BuyerName" />
                 </div>
 
+            </div>
+            <div class="Linha">
                 <div class="Input">
                     <p>Buyer's E-mail <span class="Obrigatorio">*</span></p>
                     <input type="text" asp-for="Email" />
                 </div>
-
-            </div>
-            <div class="Linha">
                 <div class="Input">
                     <p>Phone Number <span class="Obrigatorio">*</span></p>
                     <input type="text" asp-for="PhoneNumber" />
@@ -241,31 +244,33 @@
             <div class="Linha">
 
                 <div class="Input">
-                    <p>Contact <span class="Obrigatorio"></span></p>
-                    <input type="text" asp-for="DeliveryContact" />
-                </div>
-                <div class="Input">
-                    <p>Address  <span class="Obrigatorio"></span></p>
-                    <input type="text" asp-for="DeliveryAddress" />
-                </div>
-
-            </div>
-
-            <div class="Linha">
-                <div class="Input">
-                    <p>Zip Code <span class="Obrigatorio"></span></p>
-                    <input type="text" asp-for="DeliveryZipCode" />
+                    <p>E-mail <span class="Obrigatorio"></span></p>
+                    <input type="text" asp-for="DeliveryEmail" />
                 </div>
                 <div class="Input">
                     <p>Phone  <span class="Obrigatorio"></span></p>
                     <input type="text" asp-for="DeliveryPhone" />
                 </div>
                 <div class="Input">
-                    <p>E-mail <span class="Obrigatorio"></span></p>
-                    <input type="text" asp-for="DeliveryEmail" />
+                    <p>Contact <span class="Obrigatorio"></span></p>
+                    <input type="text" asp-for="DeliveryContact" />
                 </div>
 
+            </div>
 
+            <div class="Linha">
+                <div class="Input">
+                    <p>Address  <span class="Obrigatorio"></span></p>
+                    <input type="text" asp-for="DeliveryAddress" />
+                </div>
+                <div class="Input">
+                    <p>State <span></span></p>
+                    <input type="text" asp-for="DeliveryState" />
+                </div>
+                <div class="Input">
+                    <p>Zip Code <span class="Obrigatorio"></span></p>
+                    <input type="text" asp-for="DeliveryZipCode" />
+                </div>
             </div>
         </fieldset>
 
@@ -276,15 +281,16 @@
                 <div style="flex-basis:100%" class="Input">
                     <p>Currency</p>
                     <select asp-for="Currency" id="Currency">
+                        <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                         <option value="GBP">GBP</option>
                     </select>
                 </div>
-                   <div class="Input">
+                <div class="Input">
                     <p>StaffName <span class="Obrigatorio"></span></p>
                     <input type="text" asp-for="StaffName" />
                 </div>
-                  <div class="Input">
+                <div class="Input">
                     <p>Notes <span class="Obrigatorio"></span></p>
                     <input type="text" asp-for="Notes" />
                 </div>

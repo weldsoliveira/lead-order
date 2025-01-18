@@ -18,7 +18,7 @@ namespace MKT.EventoLead.WebApp.Controllers
             this.productRepository = productRepository;
         }
 
-        public IActionResult B2B(string currency = "EUR")
+        public IActionResult B2B(string currency = "USD")
         {
             LeadViewModel model = new LeadViewModel();
             var produtos = productRepository.GetAllProduct(currency);
@@ -213,6 +213,8 @@ namespace MKT.EventoLead.WebApp.Controllers
                 html.Append(CreateRow("Zip Code", model.ZIPCode.ToString()));
             if (!string.IsNullOrEmpty(model.City))
                 html.Append(CreateRow("City", model.City));
+            if (!string.IsNullOrEmpty(model.State))
+                html.Append(CreateRow("State", model.State));
             if (!string.IsNullOrEmpty(model.Country))
                 html.Append(CreateRow("Country", model.Country));
             if (!string.IsNullOrEmpty(model.BuyerName))
@@ -230,6 +232,8 @@ namespace MKT.EventoLead.WebApp.Controllers
 
             if (!string.IsNullOrEmpty(model.AccountingPhone))
                 html.Append(CreateRow("Accounting Phone", model.AccountingPhone));
+            if (!string.IsNullOrEmpty(model.DeliveryState))
+                html.Append(CreateRow("Delivery State", model.DeliveryState));
 
             if (!string.IsNullOrEmpty(model.AccountingEmail))
                 html.Append(CreateRow("Accounting E-mail", model.AccountingEmail));

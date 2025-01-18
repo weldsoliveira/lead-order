@@ -28,6 +28,8 @@ public class LeadViewModel
     public string? Currency {  get; set; }
     public string StaffName { get; set; }
     public string Notes { get; set; }
+    public string? State { get; set; }
+    public string? DeliveryState { get; set; }
 }
 
 public class Product
@@ -39,5 +41,5 @@ public class Product
     public  decimal? unitPriceRetail { get; set; }
     public int? QTY { get; set; }
     public decimal? TOTAL { get; set; }
-    public string SETDISCOUNT { get; set; }   
+    public string SETDISCOUNT { get; set; }
 }

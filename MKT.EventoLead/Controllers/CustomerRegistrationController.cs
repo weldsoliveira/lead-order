@@ -122,16 +122,16 @@ namespace MKT.EventoLead.WebApp.Controllers
 
                 List<string> destCC = new List<string>
 {
-//    "labreu@granado.com.br",
-//    "sgiraudier@granado.fr",
-//    "gdemetz@granado.fr",
-//    "mdcruz@granado.fr",
-//    "larmani@granado.com.br",
-//    "epilatti@granado.com.br",
-//    "aluiz@granadophebo.com.br",
-//    "jfraga@granadophebo.com.br",
-    "wsousa@granadophebo.com.br"
-    //"lgrion@granadophebo.com.br"
+    "labreu@granado.com.br",
+    "sgiraudier@granado.fr",
+    "gdemetz@granado.fr",
+    "mdcruz@granado.fr",
+    "larmani@granado.com.br",
+    "epilatti@granado.com.br",
+    "aluiz@granadophebo.com.br",
+    "jfraga@granadophebo.com.br",
+    "wsousa@granadophebo.com.br",
+    "lgrion@granadophebo.com.br"
 };
 
                 EnviarEmail(dest, GenerateEmailBody(orderCreated), "Granado: Your order is received!", destCC);

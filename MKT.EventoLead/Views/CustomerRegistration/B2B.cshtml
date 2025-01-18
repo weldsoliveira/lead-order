@@ -1,124 +1,7 @@
 ﻿@using System.Globalization
 @model MKT.EventoLead.WebApp.ViewModels.LeadViewModel
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const currencySelect = document.getElementById('Currency');
-    const discountInput = document.getElementById('val_discount');
-    const productListContainer = document.getElementById('product-list-container');
 
-    // Reatribuir os eventos após atualização da tabela
-    function rebindTableEvents() {
-        const table = document.getElementById('product-table');
-
-        // Function to update the total for a row
-        function updateRowTotal(inputElement) {
-            const index = inputElement.getAttribute('data-index'); // Get the row index
-            const unitPrice = parseFloat(inputElement.getAttribute('data-unitprice').replace(",", ".")); // Get unit price
-            const qty = parseFloat(inputElement.value) || 0; // Get quantity (default to 0 if empty or invalid)
-
-            // Calculate the total for the row
-            const total = qty * unitPrice;
-
-            // Update the corresponding total cell
-            const totalCell = document.querySelector(`#Products\\[${index}\\]\\.TOTAL`);
-            if (totalCell) {
-                    totalCell.textContent = total.toFixed(2).replace(".", ","); // Format as 2 decimal places
-            }
-
-            updateTotalAmount();
-        }
-
-        // Function to update the total amount
-        function updateTotalAmount() {
-            let grandTotal = 0;
-            let grandTotalWithDiscount = 0;
-
-            // Iterate over all rows in the table to sum the totals
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                const totalCell = row.querySelector('.line-total');                   
-                if (totalCell) {
-                    grandTotal += parseFloat(totalCell.textContent.replace(",", ".")) || 0; // Add the line total
-                    const hasDiscount = totalCell?.getAttribute("data-set-item-discount") || 'N';
-                   
-                    if (hasDiscount === 'Y' && discountInput) {
-                        const discountValue = parseFloat(discountInput.value) || 0;
-                            grandTotalWithDiscount += (parseFloat(totalCell.textContent.replace(",", ".")) * (1 - (discountValue / 100)));
-
-                    } else{
-                            grandTotalWithDiscount += parseFloat(totalCell.textContent.replace(",", ".")) || 0;
-                    }
-                }
-            });
-                
-
-            // Update the total amount field
-            const cellTot = document.querySelector('#totAmount');
-            if (cellTot) {
-                console.log(grandTotal, grandTotal.toFixed(2), formatarValores(grandTotal.toFixed(2)));
-                cellTot.textContent = formatarValores(grandTotal.toFixed(2)) 
-            }
-
-            let per_discount = document.getElementById("val_discount").value;
-            const cellDiscount = document.querySelector('#valDiscount');
-            if (cellDiscount) {
-                cellDiscount.textContent = (per_discount || 0) + "%"; 
-            }
-
-            const cellTotDiscount = document.querySelector('#totWithDiscount');
-            if (cellTotDiscount) {
-               cellTotDiscount.textContent = formatarValores(grandTotalWithDiscount);
-            }
-                
-        }
-
-        function formatarValores(valor){
-                return new Intl.NumberFormat('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).format(valor);
-        }
-
-        // Add event listener to quantity inputs
-        table.querySelectorAll('.qty-input').forEach(input => {
-            input.addEventListener('input', function () {
-                updateRowTotal(this);
-            });
-        });
-    }
-
-    // Bind initial table events
-    rebindTableEvents();
-
-    if (currencySelect) {
-        currencySelect.addEventListener('change', function () {
-            const selectedCurrency = this.value;
-
-            // Faz a requisição AJAX para a ação UpdateProductsByCurrency
-            fetch('/CustomerRegistration/UpdateProductsByCurrency?currency=' + encodeURIComponent(selectedCurrency), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value // Inclui o token de segurança CSRF
-                }
-            })
-                .then(response => response.text())
-                .then(data => {
-                    // Atualiza o conteúdo da área com a PartialView renderizada
-                    productListContainer.innerHTML = data;
-
-                    // Reatribuir eventos após atualização da tabela
-                    rebindTableEvents();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        });
-    }
-});
-
-</script>
 
 @if ((bool?)TempData["Sucesso"] ?? false)
 {
@@ -154,6 +37,7 @@
     <div class="Formulario">
 
         <input type="hidden" asp-for="B2B" value="true" />
+        <input type="hidden" value="" id="OrderProdutoListID" name="OrderProdutoListID">
         <fieldset>
             <legend>  Customer Details</legend>
 
@@ -308,39 +192,3 @@
     </div>
   
 </form>
-
-                    <script>
-                          document.addEventListener("DOMContentLoaded", () => {
-        const qtyInputs = document.querySelectorAll(".qty-input");
-        const hiddenField = document.getElementById("OrderProdutoListID");
-        const form = document.getElementById("product-form");
-
-        if (!hiddenField) {
-            //console.error("Campo oculto 'OrderProdutoListID' não encontrado.");
-            return;
-        }
-
-        // Função para atualizar o campo oculto
-        const updateHiddenField = () => {
-            const selectedIds = Array.from(qtyInputs)
-                .filter(input => input.value.trim() !== "" && parseInt(input.value.trim()) > 0)
-                .map(input => input.dataset.id);
-
-            hiddenField.value = selectedIds.join(",");
-        };
-
-        // Atualiza o campo oculto em tempo real
-        qtyInputs.forEach(input => {
-            input.addEventListener("input", updateHiddenField);
-        });
-
-        // Atualiza o campo oculto antes de enviar o formulário
-        form.addEventListener("submit", (event) => {
-            updateHiddenField();
-        });
-
-        // Atualiza inicialmente caso existam valores predefinidos
-        updateHiddenField();
-    });
-
-                    </script>

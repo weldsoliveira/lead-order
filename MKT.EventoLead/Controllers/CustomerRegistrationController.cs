@@ -122,6 +122,7 @@ namespace MKT.EventoLead.WebApp.Controllers
 
                 List<string> destCC = new List<string>
 {
+
     "labreu@granado.com.br",
     "sgiraudier@granado.fr",
     "gdemetz@granado.fr",
@@ -131,6 +132,7 @@ namespace MKT.EventoLead.WebApp.Controllers
     "aluiz@granadophebo.com.br",
     "jfraga@granadophebo.com.br",
     "wsousa@granadophebo.com.br",
+    "dparaujo@granadophebo.com.br",
     "lgrion@granadophebo.com.br"
 };
 

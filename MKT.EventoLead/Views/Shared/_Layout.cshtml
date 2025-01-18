@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/External/Select2/css/select2.min.css" />
+
+    <link rel="stylesheet" href="~/CSS/index.css" asp-append-version="true" />
+
+    <title>@ViewData["Title"]</title>
+</head>
+<body class="roboto-regular">
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <img src="~/Asset/Copyright.svg" />
+    </footer>
+
+    <script src="~/External/JQuery/jquery.js"></script>
+
+    <script src="~/External/Select2/js/select2.min.js"></script>
+
+    <script src="~/JavaScript/index.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

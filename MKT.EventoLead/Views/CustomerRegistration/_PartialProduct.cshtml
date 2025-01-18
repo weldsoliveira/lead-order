@@ -1,0 +1,69 @@
+﻿@model MKT.EventoLead.WebApp.ViewModels.LeadViewModel
+<table class="TabelaEstilizada" id="product-table">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>DESCRIPTON</th>
+            <th>
+
+                RETAIL
+            </th>
+            <th>
+                WHOLESALE
+            </th>
+            <th>
+                QTY
+            </th>
+            <th>
+                TOTAL
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var index = 0;
+        }
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.SKU</td>
+                <td>@item.DESCRIPTON</td>
+                <td><span class="unit-unitPriceRetail">@item.unitPriceRetail</span></td>
+                <td><span class="unit-price">@item.UNITPRICE</span></td>
+                <td>
+                    <input type="text"
+                           id="ProdutoListQtd_@item.Id"
+                           name="ProdutoListQuantidade"
+                           value="@item.QTY"
+                           class="qty-input"
+                           data-index="@index"
+                           data-unitprice="@item.UNITPRICE"
+                           data-id="@item.Id" />
+
+                    
+                </td>
+                <td id="Products[@index].TOTAL" name="Products[@index].TOTAL" class="line-total" data-set-item-discount="@item.SETDISCOUNT">0,00</td>
+              
+            </tr>
+          
+
+            @* Incrementa o índice para o próximo produto *@
+            index++;
+        }
+        <input type="hidden" value="" id="OrderProdutoListID" name="OrderProdutoListID">
+        <tr>
+            <td style="text-align:end" colspan="5">Subtotal</td>
+            <td id="totAmount" style="font-weight:600;">0,00</td>
+        </tr>
+        <tr>
+            <td style="text-align:end" colspan="5">Discount</td>
+            <td id="valDiscount" style="font-weight:600;">0%</td>
+        </tr>
+        <tr>
+            <td style="text-align:end" colspan="5">Total</td>
+            <td id="totWithDiscount" style="font-weight:600;">0,00</td>
+        </tr>
+
+
+    </tbody>
+</table>

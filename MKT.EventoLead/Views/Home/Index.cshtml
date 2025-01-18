@@ -1,0 +1,38 @@
+﻿@if ((bool?)ViewBag.Sucesso ?? false)
+{
+    <div class="Overlay">
+        <div class="Notificacao">
+            <button onclick="OnClickFecharNotificacao()">
+                <img src="~/Asset/Close.svg" />
+            </button>
+            <div class="Container">
+                <p>Order created successfully!​</p>
+                <p>​</p>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="Banner">
+    <img src="~/Asset/Banner.jpg">
+    <div class="Sombra"></div>
+    <div class="Container">
+        <div class="NavbarInicial">
+        </div>
+        <div class="Titulo">
+            <p>WELCOME TO GRANADO’S<br />Order placement</p>
+        </div>
+    </div>
+</div>
+
+<div class="Formularios">
+    <p>customer registration</p>
+   @*  <a href="/CustomerRegistration/Consumer">
+        <img src="~/Asset/Consumer.svg" />
+        <p>Consumer</p>
+    </a> *@
+    <a href="/CustomerRegistration/B2B">
+        <img src="~/Asset/B2B.svg" />
+        <p>B2B</p>
+    </a>
+</div>

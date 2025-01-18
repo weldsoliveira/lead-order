@@ -6,8 +6,7 @@ namespace MKT.EventoLead.WebApp.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Sucesso = TempData["Sucesso"];
-            return View();
+            return NotFound();
         }
     }
 }

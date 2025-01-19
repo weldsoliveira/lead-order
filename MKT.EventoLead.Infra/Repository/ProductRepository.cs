@@ -32,11 +32,11 @@ namespace MKT.EventoLead.Infra.Repository
             return productPrices;
         }
 
-        public ProductPrice GetByIdProduct(long id)
+        public ProductPrice GetByIdProduct(long id, string currency)
         {
             var productprice = context.ProductPrice
                    .Include(pp => pp.Product)
-                  .Where(x => x.IdProduct == id).FirstOrDefault();
+                  .Where(x => x.IdProduct == id && x.Currency == currency).FirstOrDefault();
 
             return productprice;
         }

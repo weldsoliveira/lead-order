@@ -164,7 +164,7 @@ namespace MKT.EventoLead.WebApp.Controllers
                         if (int.TryParse(idProduto[i], out int id) && int.TryParse(valorProduto[i], out int qty))
                         {
 
-                            var produtoPriceAtual = productRepository.GetByIdProduct(id);
+                            var produtoPriceAtual = productRepository.GetByIdProduct(id,leadViewModel.Currency);
                             if (produtoPriceAtual != null && qty > 0)
                             {
                                 var productNew = new MKT.EventoLead.WebApp.ViewModels.Product

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MKT.EventoLead.Domain.Entities;
 using MKT.EventoLead.Domain.Interfaces.Repository;
+using MKT.EventoLead.WebApp.Helpers;
 using MKT.EventoLead.WebApp.ViewModels;
 using Newtonsoft.Json;
 using System.Text;
@@ -21,7 +22,7 @@ namespace MKT.EventoLead.WebApp.Controllers
         public IActionResult B2B(string currency = "EUR")
         {
             LeadViewModel model = new LeadViewModel();
-            var produtos = productRepository.GetAllProduct(currency);
+            List<ProductPrice> produtos = SetCacheProdutosList(currency);
 
             var produtosPriceList = new List<ViewModels.Product>();
             foreach (Domain.Entities.ProductPrice item in produtos)
@@ -39,6 +40,16 @@ namespace MKT.EventoLead.WebApp.Controllers
             model.Products = produtosPriceList.OrderBy(x => x.DESCRIPTON).ToList();
 
             return View(model);
+        }
+
+        private List<ProductPrice> SetCacheProdutosList(string currency)
+        {
+            var produtos = productRepository.GetAllProduct(currency);
+
+            // Limpa a sessão antes de adicionar novos produtos
+            HttpContext.Session.Remove("Produtos");
+            HttpContext.Session.SetObjectAsJson("Produtos", produtos);
+            return produtos;
         }
 
         private void EnviarEmail(List<string> to, string body, string subject, List<string> copiaOculta)
@@ -66,7 +77,7 @@ namespace MKT.EventoLead.WebApp.Controllers
         public IActionResult UpdateProductsByCurrency(string currency)
         {
             LeadViewModel model = new LeadViewModel();
-            var produtos = productRepository.GetAllProduct(currency);
+            List<ProductPrice> produtos = SetCacheProdutosList(currency);
 
             var produtosPriceList = new List<ViewModels.Product>();
             foreach (Domain.Entities.ProductPrice item in produtos)
@@ -97,7 +108,7 @@ namespace MKT.EventoLead.WebApp.Controllers
         public IActionResult Create(LeadViewModel leadViewModel)
         {
             AttachProdutos(leadViewModel);
-
+            string currencyCurrent = leadViewModel.Currency;
             var orderCreated = leadViewModel;
 
             string leadViewModelComoJSONString = JsonConvert.SerializeObject(leadViewModel);
@@ -124,6 +135,7 @@ namespace MKT.EventoLead.WebApp.Controllers
                 List<string> destCC = new List<string>
 {
 
+
     "labreu@granado.com.br",
     "sgiraudier@granado.fr",
     "gdemetz@granado.fr",
@@ -134,14 +146,15 @@ namespace MKT.EventoLead.WebApp.Controllers
     "jfraga@granadophebo.com.br",
     "wsousa@granadophebo.com.br",
     "dparaujo@granadophebo.com.br",
-    "lgrion@granadophebo.com.br"
+    "lgrion@granadophebo.com.br",
+    "gmcosta@granadophebo.com.br"
 };
 
                 EnviarEmail(dest, GenerateEmailBody(orderCreated), "Granado: Your order is received!", destCC);
             }
 
             TempData["Sucesso"] = true;
-            return RedirectToAction("B2B", "CustomerRegistration", new { currency = leadViewModel.Currency });
+            return RedirectToAction("B2B", "CustomerRegistration", new { currency = currencyCurrent });
         }
 
 
@@ -156,6 +169,13 @@ namespace MKT.EventoLead.WebApp.Controllers
 
                 var idProduto = idProdutoString.Split(',');
                 var valorProduto = valorProdutoString.Split(',');
+                var produtos = HttpContext.Session.GetObjectFromJson<List<ProductPrice>>("Produtos");
+                
+                decimal discountPercentage = 0;
+                if (!string.IsNullOrEmpty(leadViewModel.Discount) && decimal.TryParse(leadViewModel.Discount, out decimal parsedDiscount))
+                {
+                    discountPercentage = parsedDiscount;
+                }
 
                 if (idProduto.Length == valorProduto.Length)
                 {
@@ -164,9 +184,10 @@ namespace MKT.EventoLead.WebApp.Controllers
                         if (int.TryParse(idProduto[i], out int id) && int.TryParse(valorProduto[i], out int qty))
                         {
 
-                            var produtoPriceAtual = productRepository.GetByIdProduct(id,leadViewModel.Currency);
+                            var produtoPriceAtual = produtos != null ? produtos.Where(x => x.IdProduct == id && x.Currency == leadViewModel.Currency).FirstOrDefault() : productRepository.GetByIdProduct(id, leadViewModel.Currency);
                             if (produtoPriceAtual != null && qty > 0)
                             {
+
                                 var productNew = new MKT.EventoLead.WebApp.ViewModels.Product
                                 {
                                     Id = produtoPriceAtual.Product.idProduct,
@@ -176,7 +197,8 @@ namespace MKT.EventoLead.WebApp.Controllers
                                     UNITPRICE = produtoPriceAtual.Price,
                                     unitPriceRetail = produtoPriceAtual.unitPriceRetail,
                                     QTY = qty,
-                                    TOTAL = qty * produtoPriceAtual.Price
+                                    TOTAL = qty * produtoPriceAtual.Price,
+                                    PercentageDiscount = discountPercentage,
                                 };
 
                                 if (!leadViewModel.Products.Contains(productNew))
@@ -300,10 +322,39 @@ namespace MKT.EventoLead.WebApp.Controllers
                     html.Append("</tr>");
                 }
 
-                // Adicionar linha do somatório
+                // Aplicar desconto
+                decimal discountPercentage = 0;
+                if (!string.IsNullOrEmpty(model.Discount) && decimal.TryParse(model.Discount, out decimal parsedDiscount))
+                {
+                    if (parsedDiscount > 0 && parsedDiscount < 100)
+                    {
+                        discountPercentage = parsedDiscount / 100;
+                    }
+                    else
+                    {
+                        discountPercentage = 0; // Ignorar desconto inválido
+                    }
+                }
+
+                decimal discountAmount = grandTotal * discountPercentage;
+                decimal grandTotalWithDiscount = grandTotal - discountAmount;
+
+                // Adicionar linha do subtotal
+                html.Append("<tr>");
+                html.Append("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold;'>Subtotal:</td>");
+                html.AppendFormat("<td style='border: 1px solid #ddd; padding: 8px;'>{0} {1:N2}</td>", model.Currency, grandTotal);
+                html.Append("</tr>");
+
+                // Adicionar linha do desconto
+                html.Append("<tr>");
+                html.AppendFormat("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold;'>Discount ({0}%):</td>", model.Discount);
+                html.AppendFormat("<td style='border: 1px solid #ddd; padding: 8px;'> {0} {1:N2}</td>", model.Currency, discountAmount);
+                html.Append("</tr>");
+
+                // Adicionar linha do total com desconto aplicado
                 html.Append("<tr style='font-weight: bold; background-color: #f9f9f9;'>");
-                html.Append("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right;'>Grand Total:</td>");
-                html.AppendFormat("<td style='border: 1px solid #ddd; padding: 8px;'>{0} {1}</td>", model.Currency, grandTotal);
+                html.Append("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right;'>Total:</td>");
+                html.AppendFormat("<td style='border: 1px solid #ddd; padding: 8px;'>{0} {1:N2}</td>", model.Currency, grandTotalWithDiscount);
                 html.Append("</tr>");
 
                 html.Append("</tbody>");

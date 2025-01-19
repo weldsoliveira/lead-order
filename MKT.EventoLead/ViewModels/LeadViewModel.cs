@@ -42,4 +42,5 @@ public class Product
     public int? QTY { get; set; }
     public decimal? TOTAL { get; set; }
     public string SETDISCOUNT { get; set; }
+    public decimal? PercentageDiscount { get; set; }
 }

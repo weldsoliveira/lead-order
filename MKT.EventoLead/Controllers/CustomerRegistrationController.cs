@@ -19,10 +19,11 @@ namespace MKT.EventoLead.WebApp.Controllers
             this.productRepository = productRepository;
         }
 
-        public IActionResult B2B(string currency = "EUR")
+        public IActionResult B2B()
         {
             LeadViewModel model = new LeadViewModel();
-            List<ProductPrice> produtos = SetCacheProdutosList(currency);
+            model.Currency = "EUR";
+            List<ProductPrice> produtos = SetCacheProdutosList(model.Currency);
 
             var produtosPriceList = new List<ViewModels.Product>();
             foreach (Domain.Entities.ProductPrice item in produtos)
@@ -77,6 +78,7 @@ namespace MKT.EventoLead.WebApp.Controllers
         public IActionResult UpdateProductsByCurrency(string currency)
         {
             LeadViewModel model = new LeadViewModel();
+            model.Currency = currency;
             List<ProductPrice> produtos = SetCacheProdutosList(currency);
 
             var produtosPriceList = new List<ViewModels.Product>();
@@ -150,11 +152,11 @@ namespace MKT.EventoLead.WebApp.Controllers
     "gmcosta@granadophebo.com.br"
 };
 
-                EnviarEmail(dest, GenerateEmailBody(orderCreated), "Granado: Your order is received!", destCC);
+             EnviarEmail(dest, GenerateEmailBody(orderCreated), "Granado: Your order is received!", destCC);
             }
 
             TempData["Sucesso"] = true;
-            return RedirectToAction("B2B", "CustomerRegistration", new { currency = currencyCurrent });
+            return RedirectToAction("B2B", "CustomerRegistration");
         }
 
 

@@ -162,27 +162,18 @@
         <fieldset>
             <legend>Order Details</legend>
             <div class="Linha">
-                <div class="Input">
+                <div style="flex-basis:100%" class="Input">
                     <p>Currency</p>
-                    <select asp-for="Currency" id="Currency" style="max-width: 100%;">
+                    <select asp-for="Currency" id="Currency">
                         <option value="EUR">EUR</option>
                         <option value="GBP">GBP</option>
                         <option value="USD">USD</option>
                     </select>
                 </div>
                 <div class="Input">
-                    <p>Staff Name</p>
-                    <select asp-for="StaffName" style="max-width: 100%;">
-                        <option></option>
-                        <option value="LARA">LARA</option>
-                        <option value="THIAGO">THIAGO</option>
-                        <option value="SEGOLENE">SÉGOLÈNE</option>
-                    </select>
+                    <p>Staff Name <span class="Obrigatorio"></span></p>
+                    <input type="text" asp-for="StaffName" />
                 </div>
-              
-            </div>
-
-            <div class="Linha">
                 <div class="Input">
                     <p>Notes <span class="Obrigatorio"></span></p>
                     <input type="text" asp-for="Notes" />

@@ -111,7 +111,7 @@ namespace MKT.EventoLead.WebApp.Controllers
             if (leadViewModel != null && leadViewModel.Products.Any())
             {
 
-                  leadRepository.Insert(lead);
+                leadRepository.Insert(lead);
                 string email = leadViewModel.Email;
                 leadViewModel = new();
                 leadViewModel.Products = new();

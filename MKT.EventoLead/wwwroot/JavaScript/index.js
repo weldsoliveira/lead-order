@@ -139,7 +139,12 @@
     tableObserver.observe(productListContainer, { childList: true, subtree: true });
 
     $('form').on('submit', function (event) {
-        console.log('Formulário enviado');
+        // console.log('Formulário enviado');
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.innerText = "Processing your order...";  // Texto opcional para feedback ao usuário
+        }
     });
 
 })

@@ -18,7 +18,7 @@ namespace MKT.EventoLead.WebApp.Controllers
             this.productRepository = productRepository;
         }
 
-        public IActionResult B2B(string currency = "USD")
+        public IActionResult B2B(string currency = "EUR")
         {
             LeadViewModel model = new LeadViewModel();
             var produtos = productRepository.GetAllProduct(currency);
@@ -41,7 +41,7 @@ namespace MKT.EventoLead.WebApp.Controllers
             return View(model);
         }
 
-        private void EnviarEmail(List<string> to, string body, string subject, List<string>  copiaOculta)
+        private void EnviarEmail(List<string> to, string body, string subject, List<string> copiaOculta)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace MKT.EventoLead.WebApp.Controllers
                 emailData.To = to.ToArray();
                 emailData.Bcc = copiaOculta.ToArray();
                 emailData.ShouldUseTemplate = false;
-                
+
                 var result = client.SendEmail(emailData).Result;
             }
             catch (Exception)
@@ -111,9 +111,10 @@ namespace MKT.EventoLead.WebApp.Controllers
             if (leadViewModel != null && leadViewModel.Products.Any())
             {
 
-                leadRepository.Insert(lead);
+                //  leadRepository.Insert(lead);
                 string email = leadViewModel.Email;
                 leadViewModel = new();
+                leadViewModel.Products = new();
                 List<string> dest = new List<string>
 {
 
@@ -152,7 +153,7 @@ namespace MKT.EventoLead.WebApp.Controllers
 
             if (!string.IsNullOrEmpty(idProdutoString) && !string.IsNullOrEmpty(valorProdutoString))
             {
-               
+
                 var idProduto = idProdutoString.Split(',');
                 var valorProduto = valorProdutoString.Split(',');
 
@@ -178,14 +179,17 @@ namespace MKT.EventoLead.WebApp.Controllers
                                     TOTAL = qty * produtoPriceAtual.Price
                                 };
 
-                                leadViewModel.Products.Add(productNew);
+                                if (!leadViewModel.Products.Contains(productNew))
+                                {
+                                    leadViewModel.Products.Add(productNew);
+                                }
                             }
                         }
                     }
                 }
-              
+
             }
-           
+
 
             return leadViewModel;
         }

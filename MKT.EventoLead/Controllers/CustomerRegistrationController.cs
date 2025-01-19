@@ -353,7 +353,7 @@ namespace MKT.EventoLead.WebApp.Controllers
 
                 // Adicionar linha do total com desconto aplicado
                 html.Append("<tr style='font-weight: bold; background-color: #f9f9f9;'>");
-                html.Append("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right;'>Total:</td>");
+                html.Append("<td colspan='4' style='border: 1px solid #ddd; padding: 8px; text-align: right;'>Grand Total:</td>");
                 html.AppendFormat("<td style='border: 1px solid #ddd; padding: 8px;'>{0} {1:N2}</td>", model.Currency, grandTotalWithDiscount);
                 html.Append("</tr>");
 

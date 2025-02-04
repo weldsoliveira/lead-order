@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Repos\MKT.EventoLead.Internacional.ScentXplore\MKT.EventoLead\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2025-01-18T06:36:06.4440435Z||;True|2025-01-17T11:41:01.0959087-03:00||;True|2025-01-17T11:35:25.9594602-03:00||;True|2025-01-17T11:33:31.1783189-03:00||;True|2025-01-17T07:43:53.8917147-03:00||;True|2025-01-17T07:41:16.9521683-03:00||;True|2025-01-17T07:37:54.3178936-03:00||;True|2025-01-17T07:27:27.6696726-03:00||;True|2025-01-17T07:20:38.9454104-03:00||;True|2025-01-17T07:20:04.8799618-03:00||;True|2025-01-17T07:05:27.1177111-03:00||;True|2025-01-17T06:48:50.3505502-03:00||;True|2025-01-17T06:39:22.4484859-03:00||;True|2025-01-17T05:03:24.5373323-03:00||;True|2025-01-17T04:26:12.6292040-03:00||;True|2025-01-17T04:08:09.5034552-03:00||;True|2025-01-17T04:03:02.6878359-03:00||;True|2025-01-16T22:17:10.4448885-03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

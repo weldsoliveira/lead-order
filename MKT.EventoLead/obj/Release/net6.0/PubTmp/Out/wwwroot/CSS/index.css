@@ -1,0 +1,771 @@
+/* Cores */
+
+:root {
+    --lotion: 250, 250, 250;
+    --gainsboro: 206, 233, 219;
+    --cultured: 245, 245, 245;
+    --cultured-mod-1: 245, 251, 245;
+    --chinese-black: 8, 32, 24;
+    --eggshell: 237, 235, 221;
+    --bone: 85, 85, 85;
+    --avocado: 72, 158, 1;
+    --castleton-green: 2, 90, 68;
+    --champagne: 241, 234, 205;
+    --metallic-sunburst: 158, 142, 66;
+    --dark-gunmetal: 28, 36, 46;
+    --outer-space: 64, 73, 68;
+    --eerie-black: 23, 29, 26;
+    --sonic-silver: 121, 116, 126;
+    --mint-cream: 245, 251, 246;
+    --american-silver: 207, 207, 207;
+    --permanent-geranium-lake: 224, 43, 39;
+    --white: 255, 255, 255;
+    --black: 0, 0, 0;
+}
+
+/* Utilitário */
+
+.DisableSelect {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Fontes */
+
+@font-face {
+    font-family: Granado;
+    src: url("../Font/Granado/Granado.woff2") format("woff2");
+}
+
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.roboto-thin-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.roboto-light-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.roboto-regular-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.roboto-medium-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.roboto-bold-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.roboto-black-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* Layout */
+
+body,
+html {
+    margin: 0px;
+    overflow-x: hidden;
+    background-color: rgba(var(--mint-cream), 1);
+}
+
+html {
+    -ms-overflow-style: none;
+}
+
+    html::-webkit-scrollbar-track {
+        background-color: rgba(var(--mint-cream), 1);
+        border-radius: 7px;
+    }
+
+    html::-webkit-scrollbar {
+        width: 14px;
+        height: 14px;
+        background-color: rgba(var(--mint-cream), 1);
+    }
+
+    html::-webkit-scrollbar-thumb {
+        background-color: rgba(var(--castleton-green), 1);
+        border: 2px solid rgba(var(--mint-cream), 1);
+    }
+
+html {
+    -ms-overflow-style: none;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    overflow: visible;
+}
+
+main {
+    min-height: calc(100% - 64px);
+}
+
+.Banner {
+    width: 100%;
+    height: 556px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .Banner > img {
+        min-width: 840px;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .Banner > .Sombra {
+        width: 100%;
+        height: 556px;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom, rgba(var(--black), 0.4) 0px, rgba(var(--black), 0) 155px, rgba(var(--black), 0) calc(100% - 155px), rgba(var(--black), 0.4) 100%);
+    }
+
+    .Banner > .Container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .Banner > .Container > .NavbarInicial {
+            width: 100%;
+            height: 120px;
+            position: relative;
+        }
+
+            .Banner > .Container > .NavbarInicial > .Voltar {
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                top: 50%;
+                left: 50px;
+                transform: translate(0, -50%);
+                display: flex;
+                gap: 20px;
+            }
+
+                .Banner > .Container > .NavbarInicial > .Voltar > img {
+                    width: 16px;
+                    height: auto;
+                    color: rgba(var(--white), 1);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+            .Banner > .Container > .NavbarInicial > .Logo {
+                width: 191px;
+                height: auto;
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+                .Banner > .Container > .NavbarInicial > .Logo > img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+        .Banner > .Container > .Titulo {
+            color: rgba(var(--white), 1);
+            font-family: Granado;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 34.78px;
+            text-align: center;
+        }
+
+            .Banner > .Container > .Titulo > p {
+                margin: 0;
+                margin-bottom: 20px;
+            }
+
+.BannerForm {
+    width: 100%;
+    height: 278px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .BannerForm > img {
+        min-width: 840px;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .BannerForm > .Sombra {
+        width: 100%;
+        height: 278px;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom, rgba(var(--black), 0.4) 0px, rgba(var(--black), 0) 125px, rgba(var(--black), 0) calc(100% - 125px), rgba(var(--black), 0.4) 100%);
+    }
+
+    .BannerForm > .Container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .BannerForm > .Container > .NavbarInicial {
+            width: 100%;
+            height: 120px;
+            position: relative;
+        }
+
+            .BannerForm > .Container > .NavbarInicial > .Voltar {
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                top: 50%;
+                left: 50px;
+                transform: translate(0, -50%);
+                display: flex;
+                gap: 20px;
+            }
+
+                .BannerForm > .Container > .NavbarInicial > .Voltar > img {
+                    width: 16px;
+                    height: auto;
+                    color: rgba(var(--white), 1);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+            .BannerForm > .Container > .NavbarInicial > .Logo {
+                width: 191px;
+                height: auto;
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+                .BannerForm > .Container > .NavbarInicial > .Logo > img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+        .BannerForm > .Container > .Titulo {
+            color: rgba(var(--white), 1);
+            font-family: Granado;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 34.78px;
+            text-align: center;
+        }
+
+            .BannerForm > .Container > .Titulo > p {
+                margin: 0;
+                margin-bottom: 20px;
+            }
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+.Formularios {
+    margin: 40px auto 0 auto;
+    width: 377px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+    .Formularios > p {
+        margin: 0;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        text-align: center;
+        color: rgba(var(--castleton-green), 1);
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .Formularios > a {
+        width: 100%;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        font-weight: 500;
+        text-decoration: none;
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--castleton-green), 1);
+        border: 1px solid rgba(var(--castleton-green), 1);
+        box-shadow: 0px 1px 3px 0px #0000004D;
+        box-shadow: 0px 4px 8px 3px #00000026;
+    }
+
+footer {
+    width: 100%;
+    height: 64px;
+    position: relative;
+    color: rgba(var(--white), 1);
+    background-color: rgba(var(--castleton-green), 1);
+}
+
+    footer img {
+        width: 160px;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.Navbar {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    background-color: rgba(var(--castleton-green), 1);
+}
+
+    .Navbar > .Voltar {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        left: 50px;
+        transform: translate(0, -50%);
+        display: flex;
+        gap: 20px;
+    }
+
+        .Navbar > .Voltar > img {
+            width: 16px;
+            height: auto;
+            color: rgba(var(--white), 1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+    .Navbar > .Logo {
+        width: 191px;
+        height: auto;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+        .Navbar > .Logo > img {
+            width: 100%;
+            height: 100%;
+        }
+
+.TituloFormulario {
+    margin: 40px 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(var(--castleton-green), 1);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.Formulario {
+    margin: 0 auto 30px auto;
+    max-width: 992px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-inline: 8px;
+}
+
+    .Formulario .Linha {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+        .Formulario .Linha .Input {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            @media (max-width: 768px) {
+                flex-basis: calc(50% - 16px);
+            }
+        }
+
+            .Formulario .Linha .Input > p {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 14px;
+                text-align: left;
+            }
+
+                .Formulario .Linha .Input > p > .Obrigatorio {
+                    color: rgba(var(--permanent-geranium-lake), 1);
+                }
+
+            .Formulario .Linha .Input > input,
+            .Formulario .Linha .Input > input:focus-visible {
+                height: 28px;
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid rgba(var(--american-silver), 1);
+                outline: none;
+            }
+
+            .Formulario .Linha .Input > select,
+            .Formulario .Linha .Input > .select2,
+            .Formulario .Linha .Input > .select2 .select2-selection {
+                width: 100%;
+                height: 40px;
+            }
+
+                .Formulario .Linha .Input > .select2 .select2-selection {
+                    border: 1px solid rgba(var(--american-silver), 1);
+                    border-radius: 5px;
+                }
+
+                .Formulario .Linha .Input > .select2 .select2-selection__rendered {
+                    margin-top: 6px;
+                }
+
+                .Formulario .Linha .Input > .select2 .select2-selection__arrow {
+                    margin-top: 6px;
+                }
+
+            .Formulario .Linha .Input > * {
+                width: calc(100% - 10px);
+            }
+
+    .Formulario .Validacoes {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+        .Formulario .Validacoes > div {
+            display: flex;
+            gap: 10px;
+        }
+
+            .Formulario .Validacoes > div > div {
+                width: 18px;
+                height: 18px;
+                position: relative;
+                background-color: rgba(var(--white), 1);
+                border-radius: 5px;
+                border: 1px solid rgba(var(--american-silver), 1);
+                cursor: pointer;
+            }
+
+                .Formulario .Validacoes > div > div > img {
+                    width: 12px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    opacity: 0;
+                }
+
+                .Formulario .Validacoes > div > div.Ativo {
+                    background-color: rgba(var(--castleton-green), 1);
+                }
+
+                    .Formulario .Validacoes > div > div.Ativo > img {
+                        opacity: 1;
+                    }
+
+            .Formulario .Validacoes > div > p {
+                margin: 0;
+                flex: 1;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+            }
+
+                .Formulario .Validacoes > div > p a {
+                    color: rgba(var(--castleton-green), 1);
+                }
+
+    .Formulario .CamposObrigatorios {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 17.14px;
+        color: rgba(var(--permanent-geranium-lake), 1);
+    }
+
+    .Formulario > button {
+        width: 100%;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        font-size: 18px;
+        line-height: 22.5px;
+        font-weight: 500;
+        text-decoration: none;
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--castleton-green), 1);
+        border: 1px solid rgba(var(--castleton-green), 1);
+        box-shadow: 0px 1px 3px 0px #0000004D;
+        box-shadow: 0px 4px 8px 3px #00000026;
+    }
+
+        .Formulario > button.Desabilitado {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+    .Formulario .PrivacyPolicy {
+        margin: 0;
+        flex: 1;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+    }
+
+        .Formulario .PrivacyPolicy a {
+            color: rgba(var(--castleton-green), 1);
+        }
+
+    .Formulario fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+
+        .Formulario fieldset:last-of-type {
+            @media (max-width: 992px) {
+                width: 100%;
+                max-width: calc(100vw - 68px);
+            }
+        }
+
+
+        .Formulario fieldset legend {
+            font-weight: 500;
+        }
+
+    .Formulario select {
+        max-width: 200px;
+    }
+
+.Overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    background-color: rgba(var(--black), 0.6);
+}
+
+    .Overlay .Notificacao {
+        width: 380px;
+        height: 98px;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        background-color: rgba(var(--white), 1);
+    }
+
+        .Overlay .Notificacao > button,
+        .Overlay .Notificacao > button:focus-visible {
+            margin: 0;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            outline: unset;
+            border: unset;
+        }
+
+            .Overlay .Notificacao > button > img {
+                width: 18px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+        .Overlay .Notificacao > .Container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .Overlay .Notificacao > .Container > p:first-child {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                text-align: center;
+            }
+
+            .Overlay .Notificacao > .Container > p:last-child {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 17.5px;
+                text-align: center;
+            }
+
+
+#product-list-container {
+    overflow: auto;
+    max-width: inherit;
+}
+
+.TabelaEstilizada {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Roboto", sans-serif;
+    background-color: rgba(var(--mint-cream), 1);
+    box-shadow: 0px 4px 8px rgba(var(--dark-gunmetal), 0.2);
+}
+
+    .TabelaEstilizada thead {
+        background-color: rgba(var(--castleton-green), 1);
+    }
+
+    .TabelaEstilizada th {
+        color: rgba(var(--white), 1);
+        font-weight: 500;
+        text-align: left;
+        padding: 12px;
+    }
+
+    .TabelaEstilizada tbody tr {
+        border-bottom: 1px solid rgba(var(--american-silver), 1);
+    }
+
+    .TabelaEstilizada td {
+        padding: 10px 12px;
+        color: rgba(var(--dark-gunmetal), 1);
+    }
+
+    .TabelaEstilizada tbody tr:nth-child(even) {
+        background-color: rgba(var(--gainsboro), 0.4);
+    }
+
+    .TabelaEstilizada tbody tr:hover {
+        background-color: rgba(var(--avocado), 0.1);
+    }
+
+    .TabelaEstilizada .Acao {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--castleton-green), 1);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .TabelaEstilizada .Acao:hover {
+            background-color: rgba(var(--avocado), 1);
+        }
